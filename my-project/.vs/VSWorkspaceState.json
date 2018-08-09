@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\layouts",
-    "\\pages"
+    "\\pages",
+    "\\plugins"
   ],
-  "SelectedNode": "\\pages\\register.vue",
+  "SelectedNode": "\\nuxt.config.js",
   "PreviewInSolutionExplorer": false
 }

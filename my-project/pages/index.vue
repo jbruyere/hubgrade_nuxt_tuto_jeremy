@@ -30,8 +30,9 @@
   <div id="app">
     <h1>Welcome to vuetify</h1>
     <v-btn block="" to="/hello-world">Hello world</v-btn>
-    <v-btn block to="/login">Login</v-btn>
+    <v-btn block="" to="/login">Login</v-btn>
     <v-btn block="" to="/register">Register</v-btn>
+    <v-btn block="" v-if="logged" to="/profil">Profil</v-btn>
     <nuxt/>
   </div>
 </template>
@@ -40,8 +41,10 @@
   export default {
     layout: 'layout',
     name: 'app',
-    data () {
-      return {}
+    methods: {
+      logged () {
+        return this.$auth.loggedIn
+      }
     }
   }
 </script>

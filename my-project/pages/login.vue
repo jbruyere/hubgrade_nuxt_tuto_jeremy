@@ -42,6 +42,7 @@
 
     methods: {
       submit () {
+        console.log(this.$auth)
         this.$auth.loginWith('local', {
           data: {username: this.username,
             password: this.password}
