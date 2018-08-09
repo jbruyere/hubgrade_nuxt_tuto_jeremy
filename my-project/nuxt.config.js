@@ -20,11 +20,11 @@ module.exports = {
     '~/assets/style/app.styl'
   ],
   modules: [
-	'@nuxtjs/axios',
-	'@nuxtjs/auth'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
   auth: {
-		strategies: {
+        strategies: {
 			local: {
 				endpoints: {
 					login: { url: 'http://localhost:8000/login', method: 'post', propertyName: 'token' },

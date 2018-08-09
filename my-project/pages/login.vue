@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <p id="p"></p>
     <h1>Login</h1>
 	<v-form v-model="valid">
 		<v-text-field v-model="username" label="username"
@@ -11,8 +12,11 @@
 		</v-text-field>
 		<v-btn :disabled="!valid" color="green"
 		block @click="submit" fab>Submit</v-btn>
+    <p v-if="ok"> {{ user }} is connected</p>
+    <p v-else>Not connected</p>
 	</v-form>
-    <nuxt/> <!-- appele layout, ici layout default.vue-->
+    <v-btn block="" to="/">Home</v-btn>
+    <nuxt/>
   </div>
 </template>
 
@@ -21,6 +25,8 @@
     layout: 'layout',
     auth: false,
     data: () => ({
+      ok: false,
+      user: '',
       valid: false,
       username: '',
       usernameRule: [
@@ -39,8 +45,10 @@
         this.$auth.loginWith('local', {
           data: {username: this.username,
             password: this.password}
-        }).then((result) => console.log(result))
-          .catch((err) => console.log(err))
+        }).then(res => {
+          this.user = this.username
+          this.ok = true
+        })
       }
     }
   }

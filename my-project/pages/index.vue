@@ -29,8 +29,10 @@
   </v-layout> -->
   <div id="app">
     <h1>Welcome to vuetify</h1>
+    <v-btn block="" to="/hello-world">Hello world</v-btn>
     <v-btn block to="/login">Login</v-btn>
-    <nuxt/> <!-- appele layout, ici layout default.vue-->
+    <v-btn block="" to="/register">Register</v-btn>
+    <nuxt/>
   </div>
 </template>
 
