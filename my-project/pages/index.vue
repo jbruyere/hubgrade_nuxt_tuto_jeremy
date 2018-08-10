@@ -30,11 +30,13 @@
   <div id="app">
     <h1>Welcome to vuetify</h1>
     <v-btn block="" to="/hello-world">Hello world</v-btn>
+    <v-btn block="" to="/user">Find user</v-btn>
     <v-btn block="" color="green" @click="click">Account </v-btn>
     <v-form v-if="account">
       <v-btn block="" to="/login" v-if="!logged">Login</v-btn>
       <v-btn block="" to="/register" v-if="!logged">Register</v-btn>
       <v-btn block="" v-if="logged" to="/profil">Profil</v-btn>
+      <v-btn block="" v-if="logged" to="/post">Posts</v-btn>
     </v-form>
     <v-form>
       <v-btn color="red" block="" v-if="logged" @click="logout">Logout</v-btn>
