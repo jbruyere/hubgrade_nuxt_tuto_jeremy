@@ -30,10 +30,16 @@
   <div id="app">
     <h1>Welcome to vuetify</h1>
     <v-btn block="" to="/hello-world">Hello world</v-btn>
-    <v-btn block="" to="/login">Login</v-btn>
-    <v-btn block="" to="/register">Register</v-btn>
-    <v-btn block="" v-if="logged" to="/profil">Profil</v-btn>
-    <nuxt/>
+    <v-btn block="" color="green" @click="click">Account </v-btn>
+    <v-form v-if="account">
+      <v-btn block="" to="/login" v-if="!logged">Login</v-btn>
+      <v-btn block="" to="/register" v-if="!logged">Register</v-btn>
+      <v-btn block="" v-if="logged" to="/profil">Profil</v-btn>
+    </v-form>
+    <v-form>
+      <v-btn color="red" block="" v-if="logged" @click="logout">Logout</v-btn>
+    </v-form>
+    <nuxt/> 
   </div>
 </template>
 
@@ -41,9 +47,31 @@
   export default {
     layout: 'layout',
     name: 'app',
+    data: () => ({
+      logged: false,
+      account: false
+    }),
+
     methods: {
-      logged () {
-        return this.$auth.loggedIn
+      click () {
+        this.$axios.get('http://localhost:8000/logged'
+        ).then(res => {
+          this.account = !this.account
+          if (res.data.log === 'true') {
+            this.logged = true
+          } else {
+            this.logged = false
+          }
+        })
+      },
+      logout () {
+        this.$axios.delete('http://localhost:8000/logout'
+        ).then(res => {
+          this.account = false
+          this.logged = false
+        }).catch(err => {
+          console.log(err)
+        })
       }
     }
   }
