@@ -15,6 +15,21 @@
 			<p><strong>Bio: </strong>{{ bio }}</p>
 		</div>
 	</v-form>
+	<v-btn color="green" @click="edition = !edition">Edit</v-btn>
+	<v-form v-if="edition" v-model="valid">
+		<v-text-field v-model="pseudofield" label="new pseudo" color="yellow">
+		</v-text-field>
+		<v-text-field v-model="phonefield" label="new phone" color="yellow">
+		</v-text-field>
+		<v-text-field v-model="cityfield" label="new city" color="yellow">
+		</v-text-field>
+		<v-text-field v-model="zipcodefield" label="new zipcode" color="yellow">
+		</v-text-field>
+		<v-textarea v-model="biofield" label="new bio" color="yellow">
+		</v-textarea>
+		<v-btn color="green"
+		block @click="update" fab>Update profil</v-btn>
+	</v-form>
 	<v-btn to="/">Home</v-btn>
     <nuxt/>
   </div>
@@ -26,6 +41,7 @@
     data: () => ({
       valid: true,
       profil: false,
+      edition: false,
       username: '',
       pseudo: '',
       id: '',
@@ -33,7 +49,15 @@
       city: '',
       phone: '',
       zipcode: '',
-      bio: ''
+      bio: '',
+      pseudofield: '',
+      cityfield: '',
+      phonefield: '',
+      zipcodefield: '',
+      biofield: '',
+      keys: ['phone', 'city', 'zipcode', 'bio', 'pseudo', null],
+      values: [],
+      infos: {}
     }),
     computed: {
       logged () {
@@ -50,6 +74,25 @@
           this.bio = res.data.bio
           this.zipcode = res.data.zipcode
           this.id = res.data.id
+          this.phone = res.data.phone
+          this.city = res.data.city
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      update () {
+        this.values = [this.phonefield, this.cityfield, this.zipcodefield, this.biofield, this.pseudofield]
+        for (var i = 0; this.keys[i] != null; i++) {
+          if (this.values[i] != null) {
+            this.infos[this.keys[i]] = this.values[i]
+          }
+        }
+        this.$axios.put(
+          'http://localhost:8000/user/profil',
+          this.infos).then(res => {
+          this.pseudo = res.data.pseudo
+          this.bio = res.data.bio
+          this.zipcode = res.data.zipcode
           this.phone = res.data.phone
           this.city = res.data.city
         }).catch(err => {

@@ -12,10 +12,12 @@
 		</v-text-field>
 		<v-btn :disabled="!valid" color="green"
 		block @click="submit" fab>Submit</v-btn>
-    <p v-if="ok"> {{ user }} is connected</p>
-    <p v-else>Not connected</p>
+    <!--<p v-if="ok"> {{ user }} is connected</p>
+    <p v-else>Not connected</p>-->
 	</v-form>
     <v-btn block="" to="/">Home</v-btn>
+    <v-alert :value="alert" type="error"> Invalid Username/password</v-alert>
+    <v-alert :value="!alert && ok" type="success"> {{ user }} is connected</v-alert>
     <nuxt/>
   </div>
 </template>
@@ -28,6 +30,7 @@
       ok: false,
       user: '',
       valid: false,
+      alert: false,
       username: '',
       usernameRule: [
         v => !!v || 'Username is required',
@@ -49,7 +52,11 @@
         }).then(res => {
           this.user = this.username
           this.ok = true
+          this.alert = false
         })
+        if (this.ok === false) {
+          this.alert = true
+        }
       }
     }
   }
