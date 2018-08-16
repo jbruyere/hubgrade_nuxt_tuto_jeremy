@@ -28,7 +28,7 @@
     </v-flex>
   </v-layout> -->
   <div id="app">
-    <h1>Welcome to vuetify</h1>
+    <h1>Welcome</h1>
     <v-btn block="" to="/hello-world">Hello world</v-btn>
     <v-btn block="" to="/user">Find user</v-btn>
     <v-btn block="" color="green" @click="click">Account </v-btn>
